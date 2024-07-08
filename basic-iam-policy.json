@@ -1,37 +1,54 @@
 {
-  "Version": "2012-10-17",
-  "Statement": [
-    {
-      "Effect": "Allow",
-      "Action": [
-        "iam:GetAccountPasswordPolicy",
-        "iam:ListRoles",
-        "iam:ListVirtualMFADevices"
-      ],
-      "Resource": "*"
-    },
-    {
-      "Effect": "Allow",
-      "Action": [
-        "iam:ChangePassword",
-        "iam:GetLoginProfile",
-        "iam:GetUser",
-        "iam:ListMFADevices",
-        "iam:ListAccessKeys",
-        "iam:ListSigningCertificates",
-        "iam:ListUserTags",
-        "iam:GetAccessKeyLastUsed",
-        "iam:DeactivateMFADevice",
-        "iam:EnableMFADevice",
-        "iam:ResyncMFADevice"
-      ],
-      "Resource": "arn:aws:iam::###-AWS-ACCOUNT-NUMBER-###:user/${aws:username}"
-    },
-    {
-      "Sid": "AllowManageOwnVirtualMFADevice",
-      "Effect": "Allow",
-      "Action": "iam:CreateVirtualMFADevice",
-      "Resource": "arn:aws:iam::*:mfa/*"
-    }
-  ]
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "AllowSelfManagement",
+            "Effect": "Allow",
+            "Action": [
+                "iam:ChangePassword",
+                "iam:CreateAccessKey",
+                "iam:DeleteAccessKey",
+                "iam:GetAccessKeyLastUsed",
+                "iam:ListAccessKeys",
+                "iam:UpdateAccessKey",
+                "iam:CreateLoginProfile",
+                "iam:DeleteLoginProfile",
+                "iam:GetLoginProfile",
+                "iam:UpdateLoginProfile",
+                "iam:ListMFADevices",
+                "iam:DeactivateMFADevice",
+                "iam:EnableMFADevice",
+                "iam:ResyncMFADevice",
+                "iam:DeleteVirtualMFADevice",
+                "iam:CreateVirtualMFADevice",
+                "iam:ListVirtualMFADevices",
+                "iam:ListUserPolicies",
+                "iam:GetUserPolicy",
+                "iam:PutUserPolicy",
+                "iam:DeleteUserPolicy",
+                "iam:ListAttachedUserPolicies",
+                "iam:AttachUserPolicy",
+                "iam:DetachUserPolicy",
+                "iam:ListGroupsForUser",
+                "iam:AddUserToGroup",
+                "iam:RemoveUserFromGroup",
+                "iam:UploadSSHPublicKey",
+                "iam:ListSSHPublicKeys",
+                "iam:GetSSHPublicKey",
+                "iam:UpdateSSHPublicKey",
+                "iam:DeleteSSHPublicKey",
+                "iam:TagUser",
+                "iam:UntagUser",
+                "iam:ListUserTags",
+                "iam:ListGroups",
+                "iam:GetUser"
+            ],
+            "Resource": [
+                "arn:aws:iam::*:user/${aws:username}",
+                "arn:aws:iam::*:mfa/${aws:username}",
+                "arn:aws:iam::*:user/${aws:username}/ssh/public-key/*",
+                "arn:aws:iam::*:user/${aws:username}/policy/*"
+            ]
+        }
+    ]
 }
